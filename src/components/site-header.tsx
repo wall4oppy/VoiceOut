@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet"
@@ -52,9 +53,14 @@ export function SiteHeader() {
             <div className="container mx-auto flex h-14 items-center px-6">
                 <div className="mr-4 hidden md:flex">
                     <Link href="/" className="mr-6 flex items-center space-x-2">
-                        <span className="hidden font-bold sm:inline-block">
-                            VoiceOut
-                        </span>
+                        <Image
+                            src="/logo-with-text.png"
+                            alt="VoiceOut"
+                            width={140}
+                            height={40}
+                            className="h-8 w-auto"
+                            priority
+                        />
                     </Link>
                     <nav className="flex items-center space-x-6 text-sm font-medium">
                         <Link href="/report" className="transition-colors hover:text-foreground/80 text-foreground/60">
@@ -139,8 +145,15 @@ export function SiteHeader() {
                     </SheetContent>
                 </Sheet>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden">
-                    <Link href="/" className="font-bold text-lg">
-                        VoiceOut
+                    <Link href="/" className="flex items-center">
+                        <Image
+                            src="/logo-with-text.png"
+                            alt="VoiceOut"
+                            width={120}
+                            height={36}
+                            className="h-7 w-auto"
+                            priority
+                        />
                     </Link>
                 </div>
                 <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
