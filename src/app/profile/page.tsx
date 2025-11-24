@@ -195,8 +195,7 @@ export default function ProfilePage() {
     const handleMoodSelect = (mood: 'happy' | 'calm' | 'okay' | 'sad' | 'angry') => {
         addEmotionEntry({
             mood,
-            content: "快速心情記錄",
-            tags: ["快速記錄"]
+            content: "快速心情記錄"
         })
         toast.success("心情已記錄", { description: `已記錄您今天的心情：${getMoodLabel(mood)}` })
     }
