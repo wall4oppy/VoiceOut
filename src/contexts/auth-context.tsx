@@ -41,6 +41,7 @@ interface AuthContextType {
     isLoading: boolean
     login: (email: string, role: UserRole, userData?: Partial<User>) => void
     logout: () => void
+    updateProfile: (updates: Partial<User>) => void
     hasPermission: (permission: Permission) => boolean
     hasAnyPermission: (permissions: Permission[]) => boolean
     hasAllPermissions: (permissions: Permission[]) => boolean
@@ -94,6 +95,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setIsLoggedIn(true)
     }
 
+    const updateProfile = (updates: Partial<User>) => {
+        if (!user) return
+
+        const updatedUser = { ...user, ...updates }
+        setUser(updatedUser)
+        localStorage.setItem("userData", JSON.stringify(updatedUser))
+
+        // Update legacy storage if needed
+        if (updates.email) localStorage.setItem("userEmail", updates.email)
+        if (updates.role) localStorage.setItem("userRole", updates.role)
+    }
+
     const logout = () => {
         localStorage.removeItem("isLoggedIn")
         localStorage.removeItem("userData")
@@ -133,6 +146,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             isLoading,
             login,
             logout,
+            updateProfile,
             hasPermission: checkPermission,
             hasAnyPermission: checkAnyPermission,
             hasAllPermissions: checkAllPermissions,

@@ -10,11 +10,13 @@ import { Card } from "@/components/ui/card"
 import { FadeIn } from "@/components/ui/motion"
 import { ShieldCheck, ShieldAlert, Heart, Scale } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
+import { useUserData } from "@/contexts/user-data-context"
 import { UserRole, ROLE_METADATA } from "@/lib/roles"
 
 export default function LoginPage() {
     const router = useRouter()
     const { login, user, isLoggedIn } = useAuth()
+    const { addActivity } = useUserData()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -100,6 +102,7 @@ export default function LoginPage() {
                         const role = selectedRole || UserRole.VICTIM
                         login(email, role)
                     }
+                    addActivity("登入帳戶", "成功")
                     router.push("/")
                 } else {
                     alert("登入失敗：請檢查帳號密碼")
@@ -293,6 +296,35 @@ export default function LoginPage() {
                             </div>
                         </div>
                     </Card>
+
+                    {/* Quick Login Section */}
+                    <div className="mt-8">
+                        <div className="relative mb-4">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t"></div>
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-4 bg-card text-muted-foreground">測試帳號快速登入</span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                            {Object.entries(testUsers).map(([email, user]) => (
+                                <Button
+                                    key={email}
+                                    variant="outline"
+                                    className="h-auto py-2 flex flex-col items-start gap-1"
+                                    onClick={() => {
+                                        login(email, user.role, user.userData)
+                                        addActivity("登入帳戶", "成功")
+                                        router.push("/")
+                                    }}
+                                >
+                                    <span className="font-medium text-xs">{ROLE_METADATA[user.role].label}</span>
+                                    <span className="text-[10px] text-muted-foreground">{email}</span>
+                                </Button>
+                            ))}
+                        </div>
+                    </div>
 
                     <div className="mt-6 text-center">
                         <p className="text-sm text-muted-foreground">

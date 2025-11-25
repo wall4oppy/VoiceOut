@@ -33,11 +33,19 @@ export interface MoodCheckIn {
     note?: string
 }
 
+export interface Activity {
+    id: string
+    action: string
+    date: string
+    status: string
+}
+
 interface UserData {
     emotionJournal: EmotionJournalEntry[]
     assessmentResults: AssessmentResult[]
     safetyPlan: SafetyPlanData | null
     moodHistory: MoodCheckIn[]
+    activityHistory: Activity[]
 }
 
 interface UserDataContextType {
@@ -47,6 +55,8 @@ interface UserDataContextType {
     addAssessmentResult: (result: Omit<AssessmentResult, "id" | "date">) => void
     updateSafetyPlan: (plan: Omit<SafetyPlanData, "lastUpdated">) => void
     addMoodCheckIn: (mood: Omit<MoodCheckIn, "id" | "date">) => void
+    addActivity: (action: string, status: string) => void
+    setMoodForDate: (date: Date, mood: string) => void
     exportData: () => string
     clearAllData: () => void
 }
@@ -61,6 +71,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         assessmentResults: [],
         safetyPlan: null,
         moodHistory: [],
+        activityHistory: [],
     })
 
     // Load data from localStorage on mount
@@ -68,7 +79,16 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         const stored = localStorage.getItem(STORAGE_KEY)
         if (stored) {
             try {
-                setUserData(JSON.parse(stored))
+                const parsed = JSON.parse(stored)
+                setUserData((prev) => ({
+                    ...prev,
+                    ...parsed,
+                    // Ensure arrays are initialized if missing in stored data (migration for old data)
+                    emotionJournal: Array.isArray(parsed.emotionJournal) ? parsed.emotionJournal : [],
+                    assessmentResults: Array.isArray(parsed.assessmentResults) ? parsed.assessmentResults : [],
+                    moodHistory: Array.isArray(parsed.moodHistory) ? parsed.moodHistory : [],
+                    activityHistory: Array.isArray(parsed.activityHistory) ? parsed.activityHistory : [],
+                }))
             } catch (error) {
                 console.error("Failed to load user data:", error)
             }
@@ -90,6 +110,36 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
             ...prev,
             emotionJournal: [newEntry, ...prev.emotionJournal],
         }))
+    }
+
+    const setMoodForDate = (date: Date, mood: string) => {
+        const dateStr = date.toDateString()
+        setUserData((prev) => {
+            const existingIndex = prev.emotionJournal.findIndex(
+                (entry) => new Date(entry.date).toDateString() === dateStr
+            )
+
+            let newJournal = [...prev.emotionJournal]
+            if (existingIndex >= 0) {
+                // Update existing
+                newJournal[existingIndex] = {
+                    ...newJournal[existingIndex],
+                    mood,
+                }
+            } else {
+                // Add new
+                newJournal = [
+                    {
+                        id: Date.now().toString(),
+                        date: date.toISOString(),
+                        mood,
+                        content: "快速心情記錄",
+                    },
+                    ...newJournal,
+                ]
+            }
+            return { ...prev, emotionJournal: newJournal }
+        })
     }
 
     const addAssessmentResult = (result: Omit<AssessmentResult, "id" | "date">) => {
@@ -127,6 +177,19 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         }))
     }
 
+    const addActivity = (action: string, status: string) => {
+        const newActivity: Activity = {
+            id: Date.now().toString(),
+            action,
+            status,
+            date: new Date().toISOString(),
+        }
+        setUserData((prev) => ({
+            ...prev,
+            activityHistory: [newActivity, ...prev.activityHistory].slice(0, 50), // Keep last 50 entries
+        }))
+    }
+
     const exportData = () => {
         return JSON.stringify(userData, null, 2)
     }
@@ -138,6 +201,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
                 assessmentResults: [],
                 safetyPlan: null,
                 moodHistory: [],
+                activityHistory: [],
             })
             localStorage.removeItem(STORAGE_KEY)
         }
@@ -149,9 +213,11 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
                 userData,
                 addJournalEntry,
                 addEmotionEntry: addJournalEntry, // Alias for compatibility
+                setMoodForDate,
                 addAssessmentResult,
                 updateSafetyPlan,
                 addMoodCheckIn,
+                addActivity,
                 exportData,
                 clearAllData,
             }}

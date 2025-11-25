@@ -69,6 +69,9 @@ export function SiteHeader() {
                         <Link href="/support" className="transition-colors hover:text-foreground/80 text-foreground/60">
                             心理支持
                         </Link>
+                        <Link href="/support/peer-group" className="transition-colors hover:text-foreground/80 text-foreground/60">
+                            匿名社群
+                        </Link>
                         <Link href="/education" className="transition-colors hover:text-foreground/80 text-foreground/60">
                             教育宣導
                         </Link>
@@ -117,18 +120,8 @@ export function SiteHeader() {
                                 </Link>
                             </SheetClose>
                             <SheetClose asChild>
-                                <Link href="/education" className="text-sm font-medium transition-colors hover:text-foreground/80">
-                                    教育宣導
-                                </Link>
-                            </SheetClose>
-                            <SheetClose asChild>
-                                <Link href="/legal" className="text-sm font-medium transition-colors hover:text-foreground/80">
-                                    法律諮詢
-                                </Link>
-                            </SheetClose>
-                            <SheetClose asChild>
                                 <Link href="/support/peer-group" className="text-sm font-medium transition-colors hover:text-foreground/80">
-                                    互助圈
+                                    匿名社群
                                 </Link>
                             </SheetClose>
                             <SheetClose asChild>

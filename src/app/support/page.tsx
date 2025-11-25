@@ -59,22 +59,22 @@ export default function SupportPage() {
                     </div>
 
                     <Tabs defaultValue="breathing" className="w-full">
-                        <TabsList className="grid w-full max-w-4xl mx-auto grid-cols-2 md:grid-cols-4 mb-8">
-                            <TabsTrigger value="breathing" className="flex items-center gap-2">
+                        <TabsList className="grid grid-cols-2 w-full gap-2 mb-8 bg-transparent p-0 md:flex md:w-auto md:justify-center md:bg-muted md:p-1 md:gap-0">
+                            <TabsTrigger value="breathing" className="flex items-center justify-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary md:data-[state=active]:bg-background md:data-[state=active]:text-foreground rounded-lg border border-border md:border-transparent px-4 py-3 md:py-1.5 md:rounded-sm">
                                 <Wind className="w-4 h-4" />
-                                <span className="hidden sm:inline">呼吸練習</span>
+                                <span>呼吸練習</span>
                             </TabsTrigger>
-                            <TabsTrigger value="assessment" className="flex items-center gap-2">
+                            <TabsTrigger value="assessment" className="flex items-center justify-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary md:data-[state=active]:bg-background md:data-[state=active]:text-foreground rounded-lg border border-border md:border-transparent px-4 py-3 md:py-1.5 md:rounded-sm">
                                 <Brain className="w-4 h-4" />
-                                <span className="hidden sm:inline">心理評估</span>
+                                <span>心理評估</span>
                             </TabsTrigger>
-                            <TabsTrigger value="journal" className="flex items-center gap-2">
+                            <TabsTrigger value="journal" className="flex items-center justify-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary md:data-[state=active]:bg-background md:data-[state=active]:text-foreground rounded-lg border border-border md:border-transparent px-4 py-3 md:py-1.5 md:rounded-sm">
                                 <BookHeart className="w-4 h-4" />
-                                <span className="hidden sm:inline">情緒日記</span>
+                                <span>情緒日記</span>
                             </TabsTrigger>
-                            <TabsTrigger value="safety" className="flex items-center gap-2">
+                            <TabsTrigger value="safety" className="flex items-center justify-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary md:data-[state=active]:bg-background md:data-[state=active]:text-foreground rounded-lg border border-border md:border-transparent px-4 py-3 md:py-1.5 md:rounded-sm">
                                 <Shield className="w-4 h-4" />
-                                <span className="hidden sm:inline">安全計畫</span>
+                                <span>安全計畫</span>
                             </TabsTrigger>
                         </TabsList>
 
@@ -156,12 +156,7 @@ export default function SupportPage() {
                 </div>
             </section>
 
-            {/* Parent/Teacher Resources */}
-            <section className="w-full py-12 md:py-24 bg-background">
-                <div className="container mx-auto px-4 md:px-6">
-                    <ParentResources />
-                </div>
-            </section>
+
 
             {/* Peer Support Group CTA */}
             <section className="w-full py-12 md:py-24 bg-muted/30">
