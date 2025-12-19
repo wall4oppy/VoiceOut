@@ -113,7 +113,7 @@ export default function PeerSupportPage() {
                         </div>
 
                         {/* Main Feed */}
-                        <div className="lg:col-span-6 space-y-6">
+                        <div className="lg:col-span-6 space-y-8 mb-20">
                             {/* Mobile Header */}
                             <div className="lg:hidden mb-6">
                                 <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
@@ -126,42 +126,46 @@ export default function PeerSupportPage() {
                             </div>
 
                             {/* Create Post */}
-                            <CreatePost onPost={handleNewPost} />
+                            <div className="mb-6">
+                                <CreatePost onPost={handleNewPost} />
+                            </div>
 
                             {/* Filters & Scroll */}
-                            <div className="space-y-4">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="font-semibold text-lg">探索話題</h3>
-                                    <div className="flex gap-2">
-                                        {["推薦", "最新", "熱門"].map((filter, i) => (
-                                            <button
-                                                key={filter}
-                                                className={`px-3 py-1 text-sm rounded-full transition-colors ${i === 0 ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}
-                                            >
-                                                {filter}
-                                            </button>
-                                        ))}
+                            <div className="sticky top-14 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 border-b border-border/40 mb-6">
+                                <div className="space-y-4 px-1">
+                                    <div className="flex items-center justify-between">
+                                        <h3 className="font-semibold text-lg">探索話題</h3>
+                                        <div className="flex gap-2">
+                                            {["推薦", "最新", "熱門"].map((filter, i) => (
+                                                <button
+                                                    key={filter}
+                                                    className={`px-3 py-1 text-sm rounded-full transition-colors ${i === 0 ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:bg-muted'}`}
+                                                >
+                                                    {filter}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <ScrollArea className="w-full whitespace-nowrap pb-2">
-                                    <div className="flex w-max space-x-3 p-1">
-                                        {hotTopics.map((topic) => (
-                                            <div
-                                                key={topic.tag}
-                                                className={`px-4 py-2 rounded-full cursor-pointer transition-all hover:scale-105 shadow-sm text-sm font-medium flex items-center gap-2 ${topic.color}`}
-                                            >
-                                                {topic.tag}
-                                                <span className="opacity-60 text-xs bg-black/5 px-1.5 py-0.5 rounded-full">{topic.count}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <ScrollBar orientation="horizontal" className="hidden" />
-                                </ScrollArea>
+                                    <ScrollArea className="w-full whitespace-nowrap pb-2">
+                                        <div className="flex w-max space-x-3 p-1">
+                                            {hotTopics.map((topic) => (
+                                                <div
+                                                    key={topic.tag}
+                                                    className={`px-4 py-2 rounded-full cursor-pointer transition-all hover:scale-105 shadow-sm text-sm font-medium flex items-center gap-2 ${topic.color}`}
+                                                >
+                                                    {topic.tag}
+                                                    <span className="opacity-60 text-xs bg-black/5 px-1.5 py-0.5 rounded-full">{topic.count}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <ScrollBar orientation="horizontal" className="hidden" />
+                                    </ScrollArea>
+                                </div>
                             </div>
 
                             {/* Posts List */}
-                            <div className="divide-y divide-border/40 border-t border-border/40">
+                            <div className="divide-y divide-border/40">
                                 {posts.map((post) => (
                                     <PostCard key={post.id} post={post} />
                                 ))}
