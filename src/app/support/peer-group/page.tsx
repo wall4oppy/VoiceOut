@@ -161,7 +161,7 @@ export default function PeerSupportPage() {
                             </div>
 
                             {/* Posts List */}
-                            <div className="space-y-6">
+                            <div className="divide-y divide-border/40 border-t border-border/40">
                                 {posts.map((post) => (
                                     <PostCard key={post.id} post={post} />
                                 ))}
