@@ -4,7 +4,7 @@ import { ShieldCheck, Github, Twitter, Facebook, Instagram } from "lucide-react"
 export function SiteFooter() {
     return (
         <footer className="border-t bg-muted/30">
-            <div className="container py-10 md:py-12 flex flex-col items-center text-center">
+            <div className="container mx-auto w-full py-10 md:py-12 flex flex-col items-center text-center">
                 {/* Brand Section */}
                 <div className="flex flex-col items-center space-y-4 mb-8">
                     <Link href="/" className="flex items-center space-x-2">
