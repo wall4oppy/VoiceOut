@@ -22,6 +22,7 @@ export default function PeerSupportPage() {
                 { id: "c2", author: "星星", content: "不要理會那些人，你很棒！", time: "2 分鐘前" }
             ],
             tags: ["#校園生活", "#心情抒發"],
+            mood: "😢 難過",
             time: "10 分鐘前"
         },
         {
@@ -33,6 +34,7 @@ export default function PeerSupportPage() {
             likes: 24,
             comments: [],
             tags: ["#正能量", "#自我成長"],
+            mood: "💪 堅強",
             time: "1 小時前"
         },
         {
@@ -43,11 +45,12 @@ export default function PeerSupportPage() {
             likes: 45,
             comments: [],
             tags: ["#陪伴", "#溫暖"],
+            mood: "😊 開心",
             time: "3 小時前"
         }
     ])
 
-    const handleNewPost = (content: string, tags: string[], image?: string) => {
+    const handleNewPost = (content: string, tags: string[], image?: string, mood?: string) => {
         const post: PostProps = {
             id: Date.now().toString(),
             author: "我",
@@ -56,6 +59,7 @@ export default function PeerSupportPage() {
             likes: 0,
             comments: [],
             tags: tags.length > 0 ? tags : ["#心情"],
+            mood: mood,
             time: "剛剛"
         }
         setPosts([post, ...posts])
@@ -108,23 +112,36 @@ export default function PeerSupportPage() {
                             </Card>
                         </div>
 
-                        {/* Main Feed */}
-                        <div className="lg:col-span-6 space-y-6">
-                            {/* Mobile Header */}
-                            <div className="lg:hidden mb-6">
-                                <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
-                                    <Users className="h-6 w-6 text-primary" />
-                                    匿名社群
-                                </h1>
-                                <p className="text-muted-foreground text-sm">
-                                    分享心情，溫暖彼此
-                                </p>
+                        {/* Mobile Header */}
+                        <div className="lg:hidden mb-6">
+                            <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
+                                <Users className="h-6 w-6 text-primary" />
+                                匿名社群
+                            </h1>
+                            <p className="text-muted-foreground text-sm">
+                                分享心情，溫暖彼此
+                            </p>
+                        </div>
+
+                        {/* Create Post */}
+                        <CreatePost onPost={handleNewPost} />
+
+                        {/* Filters & Scroll */}
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <h3 className="font-semibold text-lg">探索話題</h3>
+                                <div className="flex gap-2">
+                                    {["推薦", "最新", "熱門"].map((filter, i) => (
+                                        <button
+                                            key={filter}
+                                            className={`px-3 py-1 text-sm rounded-full transition-colors ${i === 0 ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}
+                                        >
+                                            {filter}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
 
-                            {/* Create Post */}
-                            <CreatePost onPost={handleNewPost} />
-
-                            {/* Stories / Hot Topics Scroll */}
                             <ScrollArea className="w-full whitespace-nowrap pb-2">
                                 <div className="flex w-max space-x-3 p-1">
                                     {hotTopics.map((topic) => (
@@ -139,48 +156,49 @@ export default function PeerSupportPage() {
                                 </div>
                                 <ScrollBar orientation="horizontal" className="hidden" />
                             </ScrollArea>
-
-                            {/* Posts List */}
-                            <div className="space-y-6">
-                                {posts.map((post) => (
-                                    <PostCard key={post.id} post={post} />
-                                ))}
-                            </div>
                         </div>
 
-                        {/* Right Sidebar - Trending (Hidden on mobile) */}
-                        <div className="hidden lg:block lg:col-span-3 space-y-6">
-                            <Card className="border-none shadow-sm sticky top-24 bg-background/60 backdrop-blur-md">
-                                <CardHeader>
-                                    <CardTitle className="flex items-center gap-2 text-lg">
-                                        <TrendingUp className="h-5 w-5 text-orange-500" />
-                                        熱門話題
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="space-y-4">
-                                        {hotTopics.map((topic, index) => (
-                                            <div key={topic.tag} className="flex items-center justify-between group cursor-pointer p-2 rounded-lg hover:bg-muted/50 transition-colors">
-                                                <div className="flex items-center gap-3">
-                                                    <span className={`text-sm font-bold w-5 h-5 flex items-center justify-center rounded-full ${index < 3 ? 'bg-primary/10 text-primary' : 'text-muted-foreground'}`}>
-                                                        {index + 1}
-                                                    </span>
-                                                    <span className="font-medium text-sm group-hover:text-primary transition-colors">{topic.tag}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                                                    <Sparkles className="h-3 w-3" />
-                                                    {topic.count}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </CardContent>
-                            </Card>
+                        {/* Posts List */}
+                        <div className="space-y-6">
+                            {posts.map((post) => (
+                                <PostCard key={post.id} post={post} />
+                            ))}
                         </div>
                     </div>
-                </FadeIn>
+
+                    {/* Right Sidebar - Trending (Hidden on mobile) */}
+                    <div className="hidden lg:block lg:col-span-3 space-y-6">
+                        <Card className="border-none shadow-sm sticky top-24 bg-background/60 backdrop-blur-md">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2 text-lg">
+                                    <TrendingUp className="h-5 w-5 text-orange-500" />
+                                    熱門話題
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    {hotTopics.map((topic, index) => (
+                                        <div key={topic.tag} className="flex items-center justify-between group cursor-pointer p-2 rounded-lg hover:bg-muted/50 transition-colors">
+                                            <div className="flex items-center gap-3">
+                                                <span className={`text-sm font-bold w-5 h-5 flex items-center justify-center rounded-full ${index < 3 ? 'bg-primary/10 text-primary' : 'text-muted-foreground'}`}>
+                                                    {index + 1}
+                                                </span>
+                                                <span className="font-medium text-sm group-hover:text-primary transition-colors">{topic.tag}</span>
+                                            </div>
+                                            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                                                <Sparkles className="h-3 w-3" />
+                                                {topic.count}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
             </div>
-        </div>
+        </FadeIn>
+            </div >
+        </div >
     )
 }
 

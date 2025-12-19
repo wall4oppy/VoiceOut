@@ -27,6 +27,7 @@ export interface PostProps {
     likes: number
     comments: Comment[]
     tags: string[]
+    mood?: string
     time: string
 }
 
@@ -93,7 +94,14 @@ export function PostCard({ post }: { post: PostProps }) {
                         <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-background rounded-full"></span>
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-bold text-[15px] text-foreground/90 hover:text-primary transition-colors cursor-pointer">{post.author}</span>
+                        <div className="flex items-center gap-2">
+                            <span className="font-bold text-[15px] text-foreground/90 hover:text-primary transition-colors cursor-pointer">{post.author}</span>
+                            {post.mood && (
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium flex items-center gap-1">
+                                    {post.mood}
+                                </span>
+                            )}
+                        </div>
                         <span className="text-xs text-muted-foreground font-medium">{post.time}</span>
                     </div>
                 </div>
