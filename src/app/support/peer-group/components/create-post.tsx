@@ -96,7 +96,7 @@ export function CreatePost({ onPost }: CreatePostProps) {
                         <div className="space-y-4 pt-2 border-t border-border/40 animate-in fade-in slide-in-from-top-2">
                             {/* Mood Selector */}
                             {!selectedMood && (
-                                <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+                                <div className="flex items-center flex-wrap gap-2">
                                     <span className="text-xs text-muted-foreground whitespace-nowrap mr-1">心情:</span>
                                     {moods.map(m => (
                                         <button
