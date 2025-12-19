@@ -113,7 +113,7 @@ export default function PeerSupportPage() {
                         </div>
 
                         {/* Main Feed */}
-                        <div className="lg:col-span-6 space-y-8 mb-20 lg:-translate-x-[15px]">
+                        <div className="lg:col-span-6 space-y-8 mb-20 lg:-translate-x-[30px]">
                             {/* Mobile Header */}
                             <div className="lg:hidden mb-6">
                                 <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
@@ -173,7 +173,7 @@ export default function PeerSupportPage() {
                         </div>
 
                         {/* Right Sidebar - Trending (Hidden on mobile) */}
-                        <div className="hidden lg:block lg:col-span-3 space-y-6 lg:translate-x-[15px]">
+                        <div className="hidden lg:block lg:col-span-3 space-y-6 lg:translate-x-[30px]">
                             <Card className="border-none shadow-sm sticky top-24 bg-background/60 backdrop-blur-md">
                                 <CardHeader>
                                     <CardTitle className="flex items-center gap-2 text-lg">
