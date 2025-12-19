@@ -114,8 +114,8 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center p-4 bg-background">
-            <div className="w-full max-w-5xl overflow-hidden rounded-xl shadow-2xl bg-card border text-card-foreground grid lg:grid-cols-5 h-[800px] max-h-[90vh]">
+        <div className="w-full bg-background" style={{ minHeight: "calc(100vh - 3.5rem)" }}>
+            <div className="w-full grid lg:grid-cols-5" style={{ minHeight: "calc(100vh - 3.5rem)" }}>
                 {/* Visual Side - 40% */}
                 <div className="hidden lg:col-span-2 relative bg-primary/10 overflow-hidden lg:flex flex-col items-center justify-center p-8 text-primary">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 z-0" />
