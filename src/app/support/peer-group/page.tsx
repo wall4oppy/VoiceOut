@@ -167,39 +167,38 @@ export default function PeerSupportPage() {
                                 ))}
                             </div>
                         </div>
-                    </div>
 
-                    {/* Right Sidebar - Trending (Hidden on mobile) */}
-                    <div className="hidden lg:block lg:col-span-3 space-y-6">
-                        <Card className="border-none shadow-sm sticky top-24 bg-background/60 backdrop-blur-md">
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2 text-lg">
-                                    <TrendingUp className="h-5 w-5 text-orange-500" />
-                                    熱門話題
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-4">
-                                    {hotTopics.map((topic, index) => (
-                                        <div key={topic.tag} className="flex items-center justify-between group cursor-pointer p-2 rounded-lg hover:bg-muted/50 transition-colors">
-                                            <div className="flex items-center gap-3">
-                                                <span className={`text-sm font-bold w-5 h-5 flex items-center justify-center rounded-full ${index < 3 ? 'bg-primary/10 text-primary' : 'text-muted-foreground'}`}>
-                                                    {index + 1}
-                                                </span>
-                                                <span className="font-medium text-sm group-hover:text-primary transition-colors">{topic.tag}</span>
+                        {/* Right Sidebar - Trending (Hidden on mobile) */}
+                        <div className="hidden lg:block lg:col-span-3 space-y-6">
+                            <Card className="border-none shadow-sm sticky top-24 bg-background/60 backdrop-blur-md">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2 text-lg">
+                                        <TrendingUp className="h-5 w-5 text-orange-500" />
+                                        熱門話題
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="space-y-4">
+                                        {hotTopics.map((topic, index) => (
+                                            <div key={topic.tag} className="flex items-center justify-between group cursor-pointer p-2 rounded-lg hover:bg-muted/50 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <span className={`text-sm font-bold w-5 h-5 flex items-center justify-center rounded-full ${index < 3 ? 'bg-primary/10 text-primary' : 'text-muted-foreground'}`}>
+                                                        {index + 1}
+                                                    </span>
+                                                    <span className="font-medium text-sm group-hover:text-primary transition-colors">{topic.tag}</span>
+                                                </div>
+                                                <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                                                    <Sparkles className="h-3 w-3" />
+                                                    {topic.count}
+                                                </div>
                                             </div>
-                                            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                                                <Sparkles className="h-3 w-3" />
-                                                {topic.count}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </CardContent>
-                        </Card>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </div>
-            </div>
-        </FadeIn>
+                </FadeIn>
             </div >
         </div >
     )
