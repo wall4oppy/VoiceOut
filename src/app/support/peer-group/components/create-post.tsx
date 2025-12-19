@@ -53,7 +53,7 @@ export function CreatePost({ onPost }: CreatePostProps) {
     const commonEmojis = ["😊", "😂", "🥰", "🥺", "😭", "😡", "👍", "💪", "🙏", "❤️"]
 
     return (
-        <div className="p-4 bg-background/50 backdrop-blur-sm">
+        <div className="p-4 bg-background/50 backdrop-blur-sm rounded-xl border border-border/40 max-w-full overflow-hidden">
             <div className="flex gap-4">
                 <Avatar className="h-10 w-10 md:h-12 md:w-12 mt-1">
                     <AvatarFallback className="bg-primary text-primary-foreground">我</AvatarFallback>
