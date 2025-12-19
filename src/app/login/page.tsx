@@ -117,23 +117,13 @@ export default function LoginPage() {
         <div className="w-full bg-background" style={{ minHeight: "calc(100vh - 3.5rem)" }}>
             <div className="w-full grid lg:grid-cols-5" style={{ minHeight: "calc(100vh - 3.5rem)" }}>
                 {/* Visual Side - 40% */}
-                <div className="hidden lg:col-span-2 relative bg-primary/10 overflow-hidden lg:flex flex-col items-center justify-center p-8 text-primary">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 z-0" />
-                    {/* Placeholder for optional background image */}
-                    {/* <Image src="/path/to/image.jpg" alt="Login Visual" fill className="object-cover opacity-50" /> */}
-
-                    <div className="relative z-10 text-center space-y-6">
-                        <div className="h-24 w-24 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center mx-auto shadow-lg">
-                            <ShieldCheck className="h-12 w-12 text-primary" />
-                        </div>
-                        <div className="space-y-2">
-                            <h1 className="text-3xl font-bold tracking-tight text-foreground/80">VoiceOut</h1>
-                            <p className="text-lg text-muted-foreground font-medium">Your voice, your power</p>
-                        </div>
-                        <p className="text-sm text-muted-foreground/80 max-w-[200px] mx-auto">
-                            安全、匿名的網路霸凌舉報平台，我們在這裡支持你。
-                        </p>
-                    </div>
+                {/* Visual Side - 40% */}
+                <div className="hidden lg:col-span-2 relative bg-primary/10 overflow-hidden lg:flex flex-col items-center justify-center text-primary">
+                    <img
+                        src="/login-bg.svg"
+                        alt="Login Visual"
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
                 </div>
 
                 {/* Login Form Side - 60% */}
