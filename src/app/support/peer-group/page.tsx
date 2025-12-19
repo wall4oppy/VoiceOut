@@ -113,7 +113,7 @@ export default function PeerSupportPage() {
                         </div>
 
                         {/* Main Feed */}
-                        <div className="lg:col-span-6 space-y-8 mb-20 lg:-translate-x-[30px]">
+                        <div className="lg:col-span-6 space-y-8 mb-20">
                             {/* Mobile Header */}
                             <div className="lg:hidden mb-6">
                                 <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
