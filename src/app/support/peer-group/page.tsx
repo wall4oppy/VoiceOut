@@ -85,7 +85,7 @@ export default function PeerSupportPage() {
                 <FadeIn>
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         {/* Left Sidebar - Navigation & Info (Hidden on mobile) */}
-                        <div className="hidden lg:block lg:col-span-3 space-y-6">
+                        <div className="hidden lg:block lg:col-span-3 space-y-6 lg:-translate-x-[30px]">
                             <Card className="border-none shadow-sm sticky top-24 bg-background/60 backdrop-blur-md">
                                 <CardHeader>
                                     <CardTitle className="flex items-center gap-2 text-xl text-primary">
