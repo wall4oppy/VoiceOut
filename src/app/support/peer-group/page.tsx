@@ -112,57 +112,60 @@ export default function PeerSupportPage() {
                             </Card>
                         </div>
 
-                        {/* Mobile Header */}
-                        <div className="lg:hidden mb-6">
-                            <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
-                                <Users className="h-6 w-6 text-primary" />
-                                匿名社群
-                            </h1>
-                            <p className="text-muted-foreground text-sm">
-                                分享心情，溫暖彼此
-                            </p>
-                        </div>
-
-                        {/* Create Post */}
-                        <CreatePost onPost={handleNewPost} />
-
-                        {/* Filters & Scroll */}
-                        <div className="space-y-4">
-                            <div className="flex items-center justify-between">
-                                <h3 className="font-semibold text-lg">探索話題</h3>
-                                <div className="flex gap-2">
-                                    {["推薦", "最新", "熱門"].map((filter, i) => (
-                                        <button
-                                            key={filter}
-                                            className={`px-3 py-1 text-sm rounded-full transition-colors ${i === 0 ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}
-                                        >
-                                            {filter}
-                                        </button>
-                                    ))}
-                                </div>
+                        {/* Main Feed */}
+                        <div className="lg:col-span-6 space-y-6">
+                            {/* Mobile Header */}
+                            <div className="lg:hidden mb-6">
+                                <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
+                                    <Users className="h-6 w-6 text-primary" />
+                                    匿名社群
+                                </h1>
+                                <p className="text-muted-foreground text-sm">
+                                    分享心情，溫暖彼此
+                                </p>
                             </div>
 
-                            <ScrollArea className="w-full whitespace-nowrap pb-2">
-                                <div className="flex w-max space-x-3 p-1">
-                                    {hotTopics.map((topic) => (
-                                        <div
-                                            key={topic.tag}
-                                            className={`px-4 py-2 rounded-full cursor-pointer transition-all hover:scale-105 shadow-sm text-sm font-medium flex items-center gap-2 ${topic.color}`}
-                                        >
-                                            {topic.tag}
-                                            <span className="opacity-60 text-xs bg-black/5 px-1.5 py-0.5 rounded-full">{topic.count}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <ScrollBar orientation="horizontal" className="hidden" />
-                            </ScrollArea>
-                        </div>
+                            {/* Create Post */}
+                            <CreatePost onPost={handleNewPost} />
 
-                        {/* Posts List */}
-                        <div className="space-y-6">
-                            {posts.map((post) => (
-                                <PostCard key={post.id} post={post} />
-                            ))}
+                            {/* Filters & Scroll */}
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <h3 className="font-semibold text-lg">探索話題</h3>
+                                    <div className="flex gap-2">
+                                        {["推薦", "最新", "熱門"].map((filter, i) => (
+                                            <button
+                                                key={filter}
+                                                className={`px-3 py-1 text-sm rounded-full transition-colors ${i === 0 ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}
+                                            >
+                                                {filter}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <ScrollArea className="w-full whitespace-nowrap pb-2">
+                                    <div className="flex w-max space-x-3 p-1">
+                                        {hotTopics.map((topic) => (
+                                            <div
+                                                key={topic.tag}
+                                                className={`px-4 py-2 rounded-full cursor-pointer transition-all hover:scale-105 shadow-sm text-sm font-medium flex items-center gap-2 ${topic.color}`}
+                                            >
+                                                {topic.tag}
+                                                <span className="opacity-60 text-xs bg-black/5 px-1.5 py-0.5 rounded-full">{topic.count}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <ScrollBar orientation="horizontal" className="hidden" />
+                                </ScrollArea>
+                            </div>
+
+                            {/* Posts List */}
+                            <div className="space-y-6">
+                                {posts.map((post) => (
+                                    <PostCard key={post.id} post={post} />
+                                ))}
+                            </div>
                         </div>
                     </div>
 
