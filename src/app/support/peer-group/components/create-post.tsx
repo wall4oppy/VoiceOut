@@ -59,7 +59,7 @@ export function CreatePost({ onPost }: CreatePostProps) {
                     <AvatarFallback className="bg-primary text-primary-foreground">我</AvatarFallback>
                 </Avatar>
 
-                <div className="flex-1 space-y-3">
+                <div className="flex-1 min-w-0 space-y-3">
                     <div className="relative">
                         <Textarea
                             placeholder="發生了什麼事？分享一下心情吧..."
